@@ -11,12 +11,12 @@ var StateOfTasks = map[taskState]string{
 }
 
 type TaskStruct struct {
-	Id          int
-	Name        string
-	Description string
-	Status      string
-	Photo       string
-	Hex_color   taskState
+	Id          int       `json:"id"`
+	Name        string    `json:"name"`
+	Description string    `json:"description"`
+	Status      string    `json:"status"`
+	Photo       string    `json:"photo"`
+	Hex_color   taskState `json:"hex_color"`
 }
 
 type ServerMsgStruct struct {

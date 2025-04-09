@@ -2,7 +2,10 @@ package main
 
 import (
 	"goServer/db"
+
+	"goServer/tasks/endpoints/DELETE"
 	"goServer/tasks/endpoints/GET"
+	"goServer/tasks/endpoints/PATCH"
 	"goServer/tasks/endpoints/POST"
 
 	u "goServer/utils"
@@ -25,6 +28,9 @@ func main() {
 	router.GET("/tasks", GET.TasksGET)
 
 	router.POST("/tasks", POST.TasksPOST)
+
+	router.PATCH("/tasks/:id", PATCH.TasksPatch)
+	router.DELETE("/tasks/:id", DELETE.TasksDELETE)
 
 	router.NoRoute(func(ctx *gin.Context) {
 		route := ctx.Request.URL.Path

@@ -1,7 +1,6 @@
 package utils
 
 import (
-	e "goServer/errors"
 	"log"
 	"os"
 
@@ -17,7 +16,10 @@ const (
 
 func GetEnv(envName EnvNames) string {
 	err := godotenv.Load(".env")
-	e.CheckErr(err)
+
+	if err != nil {
+		log.Fatalln(err)
+	}
 
 	value := os.Getenv(string(envName))
 

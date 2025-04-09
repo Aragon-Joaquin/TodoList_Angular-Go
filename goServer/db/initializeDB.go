@@ -2,6 +2,7 @@ package db
 
 import (
 	"database/sql"
+	"log"
 
 	e "goServer/errors"
 
@@ -10,14 +11,26 @@ import (
 
 var Db *sql.DB
 
+//! this could be better in the future
+// type ContactController struct {
+// 	db  *db.Queries
+// 	ctx context.Context
+// }
+
+// func NewContactController(db *db.Queries, ctx context.Context) *ContactController {
+// 	return &ContactController{db, ctx}
+// }
+
 const (
 	Path_To_DB string = "./db/tasks.db"
 )
 
 func InitializeDb() {
 	db, err := sql.Open("sqlite3", Path_To_DB)
-	e.CheckErr(err)
 
+	if err != nil {
+		log.Fatalln(err)
+	}
 	Db = db
 
 }
@@ -39,6 +52,8 @@ func CreateTables() {
 	);
 	`)
 
-	e.CheckErr(err)
+	if err != nil {
+		log.Fatalln(err)
+	}
 
 }

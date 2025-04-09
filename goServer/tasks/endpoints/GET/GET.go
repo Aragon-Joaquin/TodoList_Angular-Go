@@ -4,6 +4,7 @@ import (
 	"goServer/db"
 	e "goServer/errors"
 	t "goServer/tasks/types"
+	"log"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -13,32 +14,41 @@ func TasksGET(c *gin.Context) {
 	taskID := c.Params.ByName("id")
 
 	if taskID == "" {
-		res := tasksGetAll()
-		c.JSON(200, res)
+		code, res := tasksGetAll()
+		c.JSON(int(code), res)
+		return
 	}
 	code, res := tasksGetOne(taskID)
 	c.JSON(int(code), res)
 }
 
-func tasksGetAll() []t.TaskStruct {
+func tasksGetAll() (t.StatusCode, interface{}) {
 	res, err := db.Db.Query(`
 	SELECT name, description, status, photo, hex_color 
 	FROM tasks 	
 	`)
 
-	e.CheckErr(err)
+	if err != nil {
+		log.Fatalln(err)
+	}
 
 	var task t.TaskStruct
 	tasksSlice := []t.TaskStruct{}
 
 	for res.Next() {
 		err := res.Scan(&task.Name, &task.Description, &task.Status, &task.Photo, &task.Hex_color)
-		e.CheckErr(err)
+
+		if err != nil {
+			log.Fatalln(err)
+		}
 
 		tasksSlice = append(tasksSlice, task)
 	}
 
-	return tasksSlice
+	if len(tasksSlice) == 0 {
+		return http.StatusOK, make([]int, 0)
+	}
+	return http.StatusOK, tasksSlice
 
 }
 

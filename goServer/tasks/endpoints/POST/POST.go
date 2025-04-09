@@ -2,11 +2,12 @@ package POST
 
 import (
 	"goServer/db"
-	e "goServer/errors"
 	t "goServer/tasks/types"
 	"log"
+	"net/http"
 
 	"github.com/gin-gonic/gin"
+	"github.com/mattn/go-sqlite3"
 )
 
 func TasksPOST(c *gin.Context) {
@@ -14,6 +15,7 @@ func TasksPOST(c *gin.Context) {
 
 	if err := c.BindJSON(&taskStr); err != nil {
 		log.Println(err)
+		return
 	}
 
 	var taskInserted t.TaskStruct
@@ -21,9 +23,12 @@ func TasksPOST(c *gin.Context) {
 	err := db.Db.QueryRow(`
 	INSERT INTO tasks(name,description,photo) VALUES($1, $2, $3) 
 	RETURNING name, description, status, photo, hex_color
-	`).Scan(&taskInserted.Name, &taskInserted.Description, &taskInserted.Status, &taskInserted.Photo, &taskInserted.Hex_color)
+	`, taskStr.Name, taskStr.Description, taskStr.Photo).Scan(&taskInserted.Name, &taskInserted.Description, &taskInserted.Status, &taskInserted.Photo, &taskInserted.Hex_color)
 
-	e.CheckErr(err)
+	if err != nil {
+		c.JSON(int(http.StatusBadRequest), t.ServerMsgStruct{ErrorMessage: err.(sqlite3.Error).Error()})
+		return
+	}
 
-	c.JSON(201, taskInserted)
+	c.JSON(int(http.StatusCreated), gin.H{"task": taskInserted})
 }
