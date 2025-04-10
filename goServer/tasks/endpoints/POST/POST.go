@@ -30,5 +30,5 @@ func TasksPOST(c *gin.Context) {
 		return
 	}
 
-	c.JSON(int(http.StatusCreated), gin.H{"task": taskInserted})
+	c.JSON(int(http.StatusCreated), taskInserted)
 }

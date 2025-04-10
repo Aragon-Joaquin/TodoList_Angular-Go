@@ -43,6 +43,6 @@ func TasksDELETE(c *gin.Context) {
 		return
 	}
 
-	c.JSON(int(http.StatusOK), gin.H{"task": taskDel})
+	c.JSON(int(http.StatusOK), taskDel)
 
 }

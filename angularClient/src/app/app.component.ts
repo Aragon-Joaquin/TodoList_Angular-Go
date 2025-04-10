@@ -1,13 +1,10 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { TasksComponent } from './tasks/tasks.component';
+import { LandingComponent } from './components/landing/landing.component';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, TasksComponent],
+  imports: [RouterOutlet, LandingComponent],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
 })
-export class AppComponent {
-  title = 'angularClient';
-}
+export class AppComponent {}

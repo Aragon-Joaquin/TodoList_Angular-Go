@@ -1,0 +1,6 @@
+<p>landing works!</p>
+@for (item of tasks.taskState(); track item.id) {
+<ul class="task-render">
+  <app-tasks [task]="item" />
+</ul>
+}

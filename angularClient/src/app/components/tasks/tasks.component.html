@@ -1,0 +1,19 @@
+@if (task != undefined) {
+<li class="task-item">
+  <div [style]="{ '--main-bg-color': task.hex_color }" class="task-color"></div>
+  <section>
+    <h4>{{ task.name }}</h4>
+    <p>
+      {{ task.description }}
+    </p>
+  </section>
+  <span>
+    {{ task.status }}
+  </span>
+</li>
+
+} @else {
+<li>
+  <h2>Oops! This task couldn't render properly :/</h2>
+</li>
+}

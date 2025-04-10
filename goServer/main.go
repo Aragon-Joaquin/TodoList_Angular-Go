@@ -11,6 +11,7 @@ import (
 	u "goServer/utils"
 	"net/http"
 
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 )
 
@@ -21,8 +22,9 @@ func main() {
 	db.CreateTables()
 
 	router := gin.Default()
-	router.SetTrustedProxies([]string{"localhost"})
-	router.Use()
+
+	router.SetTrustedProxies(nil)
+	router.Use(cors.Default())
 
 	router.GET("/tasks/:id", GET.TasksGET)
 	router.GET("/tasks", GET.TasksGET)
