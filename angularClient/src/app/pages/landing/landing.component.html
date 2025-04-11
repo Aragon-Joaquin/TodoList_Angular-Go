@@ -1,0 +1,27 @@
+<header class="header-landing">
+  <svg-angular [size]="50" svg />
+  <h1>Todo app (dont question my css)</h1>
+  <svg-golang [size]="50" svg />
+</header>
+
+(make this a separate component)
+<h3>Create | Read | Update | Delete</h3>
+<form>
+  <component-input
+    inputName="search_task"
+    labelName="Task name"
+    [extraProps]="{
+      required: true,
+      placeholder: 'Enter your search.',
+      minLength: 2,
+    }"
+  />
+
+  <input type="submit" value="Send" />
+</form>
+
+@for (item of tasks.taskState(); track item.id) {
+<ul class="task-render">
+  <app-tasks [task]="item" />
+</ul>
+}

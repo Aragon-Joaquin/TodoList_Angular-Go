@@ -1,11 +1,14 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { QueryTasksService } from '../../services/query-tasks.service';
 import { TaskStateService } from '../../services/task-state.service';
-import { TasksComponent } from '../tasks/tasks.component';
+import { TasksComponent } from '../../components/tasks/tasks.component';
+import { AngularComponent } from '../../components/svg/angular/angular.component';
+import { GolangComponent } from '../../components/svg/golang/golang.component';
+import { InputComponent } from '../../components/input/input.component';
 
 @Component({
   selector: 'app-landing',
-  imports: [TasksComponent],
+  imports: [TasksComponent, AngularComponent, GolangComponent, InputComponent],
   templateUrl: './landing.component.html',
   styleUrl: './landing.component.css',
 })

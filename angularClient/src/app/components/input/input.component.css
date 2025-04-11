@@ -1,0 +1,22 @@
+label {
+  display: flex;
+  flex-direction: column;
+  max-width: fit-content;
+  font-size: 1.1em;
+  font-weight: 500;
+  gap: 5px 0px;
+
+  & > input {
+    width: 225px;
+    max-width: 225px;
+    padding: 2px 4px;
+    border: 2px solid #00000071;
+    border-radius: 4px;
+    font-size: 0.9em;
+
+    &:focus {
+      outline-color: rgb(0, 52, 194);
+      background-color: rgb(220, 229, 255);
+    }
+  }
+}
