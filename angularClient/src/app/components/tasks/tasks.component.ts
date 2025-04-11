@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, input } from '@angular/core';
 import { tasksType } from '../../utils/types';
 
 @Component({
@@ -9,5 +9,5 @@ import { tasksType } from '../../utils/types';
   styleUrl: './tasks.component.css',
 })
 export class TasksComponent {
-  @Input({ required: true }) task: tasksType | undefined;
+  readonly task = input.required<tasksType | undefined>();
 }

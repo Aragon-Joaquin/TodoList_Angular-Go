@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild, input } from '@angular/core';
 
 type InputTypes = 'text' | 'password' | 'submit' | 'number';
 
@@ -6,13 +6,13 @@ type InputTypes = 'text' | 'password' | 'submit' | 'number';
   selector: 'component-input',
   imports: [],
   template: `
-    <label for="{{ inputName }}">
-      {{ labelName }}
+    <label for="{{ inputName() }}">
+      {{ labelName() }}
       <input
         #inputProps
-        type="{{ type }}"
-        id="{{ inputName }}"
-        name="{{ inputName }}"
+        type="{{ type() }}"
+        id="{{ inputName() }}"
+        name="{{ inputName() }}"
       />
     </label>
   `,
@@ -24,10 +24,10 @@ type InputTypes = 'text' | 'password' | 'submit' | 'number';
 ! I'll be using a ton of inputs at this point. It's frustrating.
 */
 export class InputComponent {
-  @Input() labelName: string = 'No specified';
-  @Input({ required: true }) inputName: string = '';
-  @Input() type: InputTypes = 'text';
-  @Input() extraProps: Partial<HTMLInputElement> = {};
+  readonly labelName = input<string>('No specified');
+  readonly inputName = input.required<string>();
+  readonly type = input<InputTypes>('text');
+  readonly extraProps = input<Partial<HTMLInputElement>>({});
 
   // @ViewChild('inputProps', { static: true })
   // inputProps!: ElementRef<HTMLInputElement>;

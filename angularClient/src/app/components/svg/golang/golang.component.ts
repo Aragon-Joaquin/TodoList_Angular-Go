@@ -1,9 +1,9 @@
-import { Component, Input } from '@angular/core';
+import { Component, input } from '@angular/core';
 
 @Component({
   selector: 'svg-golang',
   template: `
-    <svg role="img" viewBox="0 0 24 24" [style.width.px]="size">
+    <svg role="img" viewBox="0 0 24 24" [style.width.px]="size()">
       <title>Go Icon</title>
       <path
         fill="#00ADD8"
@@ -28,5 +28,5 @@ import { Component, Input } from '@angular/core';
   `,
 })
 export class GolangComponent {
-  @Input() size: number = 100;
+  readonly size = input<number>(100);
 }

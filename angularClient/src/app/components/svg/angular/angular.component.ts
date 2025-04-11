@@ -1,10 +1,10 @@
-import { Component, Input } from '@angular/core';
+import { Component, input } from '@angular/core';
 
 @Component({
   selector: 'svg-angular',
   imports: [],
   template: `
-    <svg role="img" viewBox="0 0 24 24" [style.width.px]="size">
+    <svg role="img" viewBox="0 0 24 24" [style.width.px]="size()">
       <title>Angular Icon</title>
       <path
         fill="#0F0F11"
@@ -19,5 +19,5 @@ import { Component, Input } from '@angular/core';
   }  `,
 })
 export class AngularComponent {
-  @Input() size: number = 100;
+  readonly size = input<number>(100);
 }

@@ -1,14 +1,14 @@
-@if (task != undefined) {
+@if (task() != undefined) {
 <li class="task-item">
-  <div [style]="{ '--main-bg-color': task.hex_color }" class="task-color"></div>
+  <div [style]="{ '--main-bg-color': task()?.hex_color }" class="task-color"></div>
   <section>
-    <h4>{{ task.name }}</h4>
+    <h4>{{ task()?.name }}</h4>
     <p>
-      {{ task.description }}
+      {{ task()?.description }}
     </p>
   </section>
   <span>
-    {{ task.status }}
+    {{ task()?.status }}
   </span>
 </li>
 
